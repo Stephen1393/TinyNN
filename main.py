@@ -1,32 +1,34 @@
 import numpy as np
 
-i = np.array([1,2,3,4])
-w1 = np.array([0.2,0.8,-0.6,0.1])
-w2 = np.array([0.3,0.9,-0.7,0.2])
-w3 = np.array([0.4,1.0,-0.8,0.3])
+class Dense():
+    def __init__(self, n_inputs, n_neurons):
+        self.n_inputs = n_inputs
+        self.n_neurons = n_neurons
+        self.weights = np.random.randn(n_neurons, n_inputs)
+        self.biases = np.zeros(n_neurons)
 
-weights = np.array([w1,w2,w3])
+    def forward(self, inputs):
+        self.output = self.weights @ inputs + self.biases
 
-bias = np.array([1,-3,4])
+class ReLU():
+    def forward(self, inputs):
+        self.output = np.maximum(inputs, 0)
 
-z = weights @ i + bias
 
-R_output = np.maximum(z, 0)
+layer1 = Dense(3, 4)
+layer2 = Dense(4, 2)
 
-#second layer
+layer1.forward(np.array([1,2,3]))
 
-i_2 = np.array(R_output)
+activated1 = ReLU()
 
-w2_1 = np.array([4, -0.3, 0.7])
-w2_2 = np.array([2, -0.1, 0.9])
+activated1.forward(layer1.output)
 
-bias2 = np.array([3,-2.2])
+layer2.forward(activated1.output)
 
-weights2 = np.array([w2_1, w2_2])
+activated2 = ReLU()
 
-m = weights2 @ i_2 + bias2
+activated2.forward(layer2.output)
 
-print(weights.shape)
-print(weights2.shape)
-print(R_output.shape)
-print(m.shape)
+print(activated1.output)
+print(activated2.output)
