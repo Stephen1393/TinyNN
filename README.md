@@ -1,3 +1,3 @@
 # Goal
 
-To practise more c++ and better understand the machinary underneath neural networks
+To build and better understand the machinary underneath neural networks and how they learn.
