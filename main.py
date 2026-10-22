@@ -30,5 +30,18 @@ activated2 = ReLU()
 
 activated2.forward(layer2.output)
 
-print(activated1.output)
-print(activated2.output)
+
+class MSE():
+    def forward(self, predictions, targets):
+        return np.mean((predictions - targets) **2)
+
+predictions = np.array([3,5])
+targets = np.array([8,7])
+
+loss_fucntion = MSE()
+
+average = loss_fucntion.forward(predictions, targets)
+
+
+print(average)
+
